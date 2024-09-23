@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>問題登録画面</title>
+</head>
+<body>
+<div th:insert="~{common/sourceList :: sourceList}"></div>
+<div th:replace="~{common/messageIcon :: messageIcon}"></div>
+<div class="container-fluid">
+	<h2>問題登録画面</h2>
+	<div class="alert d-flex align-items-center" th:classappend="|${isError ? 'alert-danger' : 'alert-primary'}|" role="alert" th:if="${message != null}">
+		<svg class="bi flex-shrink-0 me-2" width="24" height="24">
+			<use xlink:href="#exclamation-triangle-fill" th:if="${isError}" />
+			<use xlink:href="#info-fill" th:unless="${isError}"/>
+		</svg>
+		<span th:text="${message}"></span>
+	</div>
+	<form th:action="@{/makeQuestion}" method="post" th:object="${makeQuestionForm}">
+		<div class="form-group">
+			<div class="col-3 col-md-2 col-xxl-1">
+				<p><label for="questionId">問題ID：</label>
+				<input type="text" class="form-control" th:field="*{questionId}">
+			</div>
+			<span class="text-danger" th:if="${#fields.hasErrors('questionId')}" th:errors="*{auestionId}"></span>
+			<div  class="col-3 col-md-2 col-xxl-1">
+				<p><label for="questionTitle">問題名：</label>
+				<input type="text" class="form-control" th:field="*{questionTitle}">
+			</div>
+			
+			<div  class="col-3 col-md-2 col-xxl-1">
+				<p><label for="questionScript">問題文：</label>
+				<input type="text" class="form-control" th:field="*{questionScript}">
+			</div>
+			
+			<div  class="col-3 col-md-2 col-xxl-1">
+				<p><label for="answerFirst">選択肢1：</label>
+				<input type="text" class="form-control" th:field="*{answerFirst}">
+			</div>
+			
+			<div  class="col-3 col-md-2 col-xxl-1">
+				<p><label for="answerSecond">選択肢2：</label>
+				<input type="text" class="form-control" th:field="*{answerSecond}">
+			</div>
+			
+			<div  class="col-3 col-md-2 col-xxl-1">
+				<p><label for="answerThird">選択肢3：</label>
+				<input type="text" class="form-control" th:field="*{answerThird}">
+			</div>
+			
+			<div  class="col-3 col-md-2 col-xxl-1">
+				<p><label for="answerFourth">選択肢4：</label>
+				<input type="text" class="form-control" th:field="*{answerFourth}">
+			</div>
+			
+			<div  class="col-3 col-md-2 col-xxl-1">
+				<p><label for="questionAnswer">答え：</label>
+				<input type="text" class="form-control" th:field="*{questionAnswer}">
+			</div>
+			
+			<p><input type="submit" class="btn btn-primary" value="問題登録">
+		</div>
+	</form>
+	<a th:href="@{/menu}">▶メニュー画面へ戻る</a>
+</div>
+</body>
+</html>
